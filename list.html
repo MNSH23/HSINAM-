@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input class= "main" type="text"><buttton onclick="createList()">ADD</buttton>
+    <div class="main-list">
+        <div>
+           <input type = "checkbox"><span>text</span><button>Delete</button>
+        </div>
+    </div>
+    <script>
+        function createList(){
+            //GETTING THE TEXT FROM THE TEXTBOX
+            var inputElement = document.querySelector("input.main");
+            let textInsideTextbox = inputElement.value;
+            console.log(textInsideTextbox);
+            //CREATING THE LIST CONTAINER
+            var mainDiv = document.createElement("div");
+            //CREATING THE CHECKBOX
+            var inputElement = document.createElement("input");
+            inputElement.type = "checkbox";
+            //CREATING THE MAIN TEXT
+            var spanElement = document.createElement("span");
+            spanElement.textContent = textInsideTextbox;
+            //CREATING THE BUTTON
+            var buttonElement = document.createElement("button");
+            buttonElement.textContent = "Delete";
+            //putting the elements inside
+            mainDiv.appendChild(inputElement);
+            mainDiv.appendChild(spanElement);
+            mainDiv.appendChild(buttonElement);
+            //PUTTING THE NEWLY CREATED ELEMENT INSIDE THE HTML
+            var targetDiv = document.querySelector("div.main-list");
+            targetDiv.appendChild(mainDiv);
+            //console.log(targetDiv);
+        }
+    </script>
+</body>
+</html>
