@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .line{
+         text-decoration-line: line-through;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #212529;
+            background-color:yellowgreen;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px lightslategray;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: blue;
+            color:yellow;
+            padding: 1.5px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+
+        input.main {
+            padding: 12px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2c44ae;
+        }
+
+        .main-list div {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        .main-list div span {
+            margin: 0 10px;
+            flex-grow: 1;
+        }
+
+        .main-list div button {
+            margin-left: 5px;
+            background-color: orange;
+            color: #fff;
+            font-weight: bold;
+            border: 1px solid #ff9800;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .main-list div button:hover {
+            background-color: red;
+        }
+
+      
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MANISH TO DO LIST</h1>
+        </div>
+        <center>
+            <input class="main" type="text" placeholder="Enter a task">
+            <button onclick="createList()">Add</button>
+        </center>
+        <div class="main-list"></div>
+    </div>
+
+    <script>
+    function createList(){
+            //GETTING THE TEXT FROM THE TEXTBOX
+            var inputElement = document.querySelector("input.main");
+            let textInsideTextbox = inputElement.value;
+            console.log(textInsideTextbox);
+            //CREATING THE LIST CONTAINER
+            var mainDiv = document.createElement("div");
+            //CREATING THE CHECKBOX
+            var inputElement = document.createElement("input");
+            inputElement.type = "checkbox";
+            inputElement.onclick=(event)=>{
+                console.log(event.currentTarget);
+                var currentElement = event.currentTarget;
+                var tempSpan = currentElement.nextSibling;
+            //USING CSS
+                tempSpan.classList.toggle("line");
+                
+            }
+            //CREATING THE MAIN TEXT
+            var spanElement = document.createElement("span");
+            spanElement.textContent = textInsideTextbox;
+            //CREATING THE BUTTON
+            var buttonElement = document.createElement("button");
+            buttonElement.textContent = "Delete";
+            buttonElement.onclick = function(){
+               mainDiv.remove();
+            }
+        
+        //edit button
+        editElement = document.createElement("button");
+            editElement.textContent = "Edit";
+
+            //function for edit button
+            editElement.onclick = (event)=>{
+            currentDiv = event.target.parentElement;
+            editDiv = document.createElement("div");
+            editTextbox = document.createElement("input");
+            editTextbox.type="text";
+            editTextbox.value = currentDiv.querySelector("span").textContent;
+            editButton = document.createElement("button");
+            editButton.textContent="Update";
+            editDiv.appendChild(editTextbox);
+            editDiv.appendChild(editButton);
+            currentDiv.parentElement.appendChild(editDiv);
+            currentDiv.parentElement.replaceChild(editDiv,currentDiv);
+            mainDiv.replaceChild(editDiv,currentDiv);
+            console.log(currentParent);
+            }
+           //putting the elements inside
+           mainDiv.appendChild(inputElement);
+            mainDiv.appendChild(spanElement);
+            mainDiv.appendChild(buttonElement);
+            mainDiv.appendChild(editElement);
+           
+            
+            
+            
+            //PUTTING THE NEWLY CREATED ELEMENT INSIDE THE HTML
+            var targetDiv = document.querySelector("div.main-list");
+            targetDiv.appendChild(mainDiv);
+            //console.log(targetDiv);
+        }
+
+    </script>
+</body>
+
+</html>
